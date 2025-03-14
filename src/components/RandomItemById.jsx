@@ -10,7 +10,12 @@ export default function RandomItemById() {
   const [randomItem, setRandomItem] = useState(null); // เก็บข้อมูลที่สุ่มได้
   const [loading, setLoading] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false); // ควบคุมการ Flip
+  let [count, setCount] = useState(0);
+  const [isEven, setIsEven] = useState(true);
 
+  useEffect(() => {
+    setIsEven(count % 2 === 0);
+  }, [count]);
   // ฟังก์ชันดึง ID ทั้งหมด
   const fetchIds = async () => {
     const { data, error } = await supabase.from("flash-database").select("id");
@@ -59,8 +64,10 @@ export default function RandomItemById() {
 
     if (error) {
       console.error("Error fetching item:", error.message);
-    } else {
+    } else if (isEven == true) {
       setRandomItem(data); // อัพเดตข้อมูลที่สุ่มได้
+    } else {
+      alert("Please flip card before random");
     }
 
     setTimeout(() => {
@@ -72,7 +79,9 @@ export default function RandomItemById() {
     <div className="p-4 flex flex-col justify-center items-center rounded-lg gap-4 max-w-sm mx-auto">
       <HiLightningBolt className="h-32 w-32 mt-[10%] mb-4 text-yellow-200" />
       <button
-        onClick={getRandomItem}
+        onClick={() => {
+          getRandomItem();
+        }}
         disabled={loading}
         className="bg-tahiti cursor-pointer tracking-wider font-chicle-regular text-2xl text-midnight px-6 py-2 rounded-full w-auto flex justify-center items-center mb-2"
       >
@@ -82,7 +91,12 @@ export default function RandomItemById() {
       {randomItem && (
         <motion.div
           className="relative w-64 h-84 cursor-pointer"
-          onClick={() => setIsFlipped(!isFlipped)}
+          onClick={() => {
+            setIsFlipped(!isFlipped);
+            setCount((count += 1));
+            console.log(count);
+            console.log(isEven);
+          }}
           animate={{ rotateY: isFlipped ? 180 : 0 }}
           transition={{ duration: 0.6 }}
           style={{ transformStyle: "preserve-3d" }}
