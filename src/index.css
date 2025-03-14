@@ -13,6 +13,7 @@ body {
   --font-caveat-regular: caveat-regular, sans-serif;
   --font-knewave-regular: knewave-regular, sans-serif;
   --font-nunito-light: nunito-light, sans-serif;
+  --font-chicle-regular: chicle-regular, sans-serif;
 }
 
 @font-face {
@@ -33,4 +34,9 @@ body {
 @font-face {
   font-family: "nunito-light";
   src: url("/fonts/Nunito-Light.ttf");
+}
+
+@font-face {
+  font-family: "chicle-regular";
+  src: url("/fonts/Chicle-Regular.ttf");
 }

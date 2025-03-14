@@ -3,6 +3,7 @@ import supabase from "../supabase-client";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { HiLightningBolt } from "react-icons/hi";
+import Notice from "./Notice";
 
 export default function RandomItemById() {
   const [ids, setIds] = useState([]); // เก็บเฉพาะ id
@@ -66,18 +67,19 @@ export default function RandomItemById() {
   };
 
   return (
-    <div className="p-4 flex flex-col justify-center items-center rounded-lg gap-8 max-w-sm mx-auto">
-      <HiLightningBolt className="h-32 w-32 mt-[10%] text-yellow-200" />
+    <div className="p-4 flex flex-col justify-center items-center rounded-lg gap-4 max-w-sm mx-auto">
+      <HiLightningBolt className="h-32 w-32 mt-[10%] mb-4 text-yellow-200" />
       <button
         onClick={getRandomItem}
         disabled={loading}
-        className="bg-tahiti font-bangna text-midnight px-4 py-2 rounded-full w-auto mb-2"
+        className="bg-tahiti cursor-pointer tracking-wider font-chicle-regular text-2xl text-midnight px-6 py-2 rounded-full w-auto mb-2"
       >
-        {loading ? "Randomizing..." : "Random Flashcard"}
+        {loading ? "Randomizing..." : "Random Flashcard !"}
       </button>
+      <Notice />
       {randomItem && (
         <motion.div
-          className="relative w-84 h-64 cursor-pointer"
+          className="relative w-64 h-84 cursor-pointer"
           onClick={() => setIsFlipped(!isFlipped)}
           animate={{ rotateY: isFlipped ? 180 : 0 }}
           transition={{ duration: 0.6 }}
@@ -85,7 +87,7 @@ export default function RandomItemById() {
         >
           {/* ด้านหน้า - คำถาม */}
           <div
-            className="absolute w-full h-full flex gap-4 flex-col items-center justify-center bg-midnight shadow-lg rounded-lg"
+            className="absolute w-full h-full flex gap-4 flex-col items-center justify-center bg-midnight shadow-2xl rounded-lg"
             style={{
               backfaceVisibility: "hidden",
               position: "absolute"
@@ -94,23 +96,26 @@ export default function RandomItemById() {
             <h2 className="text-tahiti font-caveat-regular text-2xl opacity-50 flex-grow mt-4">
               {randomItem.category} Question
             </h2>
-            <p className="text-lg font-bold text-tahiti font-nunito-light flex-grow-[2] mt-2">
+            <p className="text-lg font-bold leading-relaxed text-center p-4 text-tahiti font-nunito-light flex-grow-[2] mt-2">
               {randomItem.question}
             </p>
           </div>
 
           {/* ด้านหลัง - คำตอบ */}
           <div
-            className="absolute w-full h-full flex flex-col overflow-hidden gap-4 items-center justify-center bg-bermuda shadow-lg rounded-lg"
+            className="absolute w-full h-full flex flex-col overflow-hidden gap-4 items-center justify-center bg-gray-400 shadow-2xl rounded-lg"
             style={{
               backfaceVisibility: "hidden",
               transform: "rotateY(180deg)",
               position: "absolute"
             }}
           >
-            <h2 className="text-base text-gray-600">Answer</h2>
-            <p className="text-2xl">{randomItem.answer}</p>
-            <span className="text-4xl text-tahiti">{randomItem.category}</span>
+            <h2 className="text-soulblue font-caveat-regular text-2xl opacity-50 flex-grow mt-4">
+              Answer
+            </h2>
+            <p className="text-lg leading-relaxed font-bold text-center p-4 text-soulblue font-nunito-light flex-grow-[2] mt-2">
+              {randomItem.answer}
+            </p>
           </div>
         </motion.div>
       )}

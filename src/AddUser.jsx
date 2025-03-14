@@ -39,9 +39,7 @@ export default function AddUser() {
         onChange={(e) => setCategory(e.target.value)}
         className="border p-2 mb-2 w-full bg-midnight"
       >
-        <option value="" className="bg-amber-100">
-          -- Select Categories --
-        </option>
+        <option value="">-- Select Categories --</option>
         {categories.map((cat, index) => (
           <option key={index} value={cat}>
             {cat}
