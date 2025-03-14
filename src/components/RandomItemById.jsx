@@ -63,7 +63,9 @@ export default function RandomItemById() {
       setRandomItem(data); // อัพเดตข้อมูลที่สุ่มได้
     }
 
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
   };
 
   return (
@@ -72,7 +74,7 @@ export default function RandomItemById() {
       <button
         onClick={getRandomItem}
         disabled={loading}
-        className="bg-tahiti cursor-pointer tracking-wider font-chicle-regular text-2xl text-midnight px-6 py-2 rounded-full w-auto mb-2"
+        className="bg-tahiti cursor-pointer tracking-wider font-chicle-regular text-2xl text-midnight px-6 py-2 rounded-full w-auto flex justify-center items-center mb-2"
       >
         {loading ? "Randomizing..." : "Random Flashcard !"}
       </button>

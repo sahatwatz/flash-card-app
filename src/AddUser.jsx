@@ -13,12 +13,13 @@ export default function AddUser() {
 
   const addUser = async () => {
     if (!category.trim() || !question.trim() || !answer.trim()) {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      alert("Please fill out the application form before submitting it");
       return;
     }
 
     setLoading(true);
     const { data, error } = await supabase
+
       .from("flash-database") // ชื่อ Table
       .insert([{ category, question, answer }]); // ข้อมูลที่ต้องการเพิ่ม
 
@@ -27,7 +28,9 @@ export default function AddUser() {
     } else {
       console.log("User added:", data);
     }
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
 
   return (
@@ -64,9 +67,9 @@ export default function AddUser() {
       <button
         onClick={addUser}
         disabled={loading}
-        className="bg-blue-500 text-white px-4 py-2 rounded w-full"
+        className="bg-soulblue text-tahiti font-chicle-regular text-2xl tracking-wider px-4 py-2 rounded w-full"
       >
-        {loading ? "กำลังเพิ่ม..." : "เพิ่มข้อมูล"}
+        {loading ? "Adding..." : "Add Card"}
       </button>
     </div>
   );
