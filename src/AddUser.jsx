@@ -36,7 +36,9 @@ export default function AddUser() {
   return (
     <div className="p-4 text-tahiti rounded-lg shadow-md gap-4 max-w-sm mx-auto flex flex-col justify-center items-center">
       <HiDocumentAdd className="h-24 w-24 mt-[10%]" />
-      <h2 className="text-xl font-bold mb-2">Add Flash card</h2>
+      <h2 className="text-4xl font-bold mb-2 font-caveat-regular">
+        Add Flashcard
+      </h2>
       <select
         value={category}
         onChange={(e) => setCategory(e.target.value)}
@@ -67,7 +69,7 @@ export default function AddUser() {
       <button
         onClick={addUser}
         disabled={loading}
-        className="bg-soulblue text-tahiti font-chicle-regular text-2xl tracking-wider px-4 py-2 rounded w-full"
+        className="bg-tahiti text-midnight font-chicle-regular text-2xl tracking-wider px-4 py-2 rounded w-full"
       >
         {loading ? "Adding..." : "Add Card"}
       </button>
