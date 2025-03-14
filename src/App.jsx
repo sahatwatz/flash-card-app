@@ -1,11 +1,14 @@
 import "./App.css";
-import AddUser from "./AddUser";
-import RandomItemById from "./components/RandomItemById";
+import { Routes, Route } from "react-router";
+import Home from "./pages/Home";
+import AddCard from "./pages/AddCard";
 function App() {
   return (
     <>
-      <AddUser />
-      <RandomItemById />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/add-card" element={<AddCard />} />
+      </Routes>
     </>
   );
 }

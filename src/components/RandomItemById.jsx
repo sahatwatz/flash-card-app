@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import supabase from "../supabase-client";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
+import { HiLightningBolt } from "react-icons/hi";
 
 export default function RandomItemById() {
   const [ids, setIds] = useState([]); // เก็บเฉพาะ id
   const [randomItem, setRandomItem] = useState(null); // เก็บข้อมูลที่สุ่มได้
   const [loading, setLoading] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false); // ควบคุมการ Flip
 
   // ฟังก์ชันดึง ID ทั้งหมด
   const fetchIds = async () => {
@@ -62,23 +66,53 @@ export default function RandomItemById() {
   };
 
   return (
-    <div className="p-4 border rounded-lg shadow-md max-w-sm mx-auto">
-      <h2 className="text-xl font-bold mb-2">
-        สุ่มข้อมูลโดยใช้ ID (เรียลไทม์)
-      </h2>
+    <div className="p-4 flex flex-col justify-center items-center rounded-lg gap-8 max-w-sm mx-auto">
+      <HiLightningBolt className="h-32 w-32 mt-[10%] text-yellow-200" />
       <button
         onClick={getRandomItem}
         disabled={loading}
-        className="bg-blue-500 text-white px-4 py-2 rounded w-full mb-2"
+        className="bg-tahiti font-bangna text-midnight px-4 py-2 rounded-full w-auto mb-2"
       >
-        {loading ? "กำลังสุ่ม..." : "สุ่มข้อมูล"}
+        {loading ? "Randomizing..." : "Random Flashcard"}
       </button>
       {randomItem && (
-        <div className="p-3 border rounded bg-gray-100">
-          <h3 className="font-bold">{randomItem.question}</h3>
-          <p>{randomItem.answer}</p>
-          <p className="text-sm text-gray-600">ID: {randomItem.id}</p>
-        </div>
+        <motion.div
+          className="relative w-84 h-64 cursor-pointer"
+          onClick={() => setIsFlipped(!isFlipped)}
+          animate={{ rotateY: isFlipped ? 180 : 0 }}
+          transition={{ duration: 0.6 }}
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          {/* ด้านหน้า - คำถาม */}
+          <div
+            className="absolute w-full h-full flex gap-4 flex-col items-center justify-center bg-midnight shadow-lg rounded-lg"
+            style={{
+              backfaceVisibility: "hidden",
+              position: "absolute"
+            }}
+          >
+            <h2 className="text-tahiti font-caveat-regular text-2xl opacity-50 flex-grow mt-4">
+              {randomItem.category} Question
+            </h2>
+            <p className="text-lg font-bold text-tahiti font-nunito-light flex-grow-[2] mt-2">
+              {randomItem.question}
+            </p>
+          </div>
+
+          {/* ด้านหลัง - คำตอบ */}
+          <div
+            className="absolute w-full h-full flex flex-col overflow-hidden gap-4 items-center justify-center bg-bermuda shadow-lg rounded-lg"
+            style={{
+              backfaceVisibility: "hidden",
+              transform: "rotateY(180deg)",
+              position: "absolute"
+            }}
+          >
+            <h2 className="text-base text-gray-600">Answer</h2>
+            <p className="text-2xl">{randomItem.answer}</p>
+            <span className="text-4xl text-tahiti">{randomItem.category}</span>
+          </div>
+        </motion.div>
       )}
     </div>
   );

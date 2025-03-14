@@ -1,16 +1,16 @@
 import React from "react";
+import AddUser from "../AddUser";
 import NavBar from "../components/NavBar";
-import Card from "../components/Card";
 import Footer from "../components/Footer";
 
-const Home = () => {
+const AddCard = () => {
   return (
     <>
       <NavBar />
-      <Card />
+      <AddUser />
       <Footer />
     </>
   );
 };
 
-export default Home;
+export default AddCard;

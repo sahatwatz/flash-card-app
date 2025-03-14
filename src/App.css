@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+@theme {
+  --color-midnight: #5c5470;
+  --color-tahiti: #faf0e6;
+  --color-bermuda: #b9b4c7;
+  --color-soulblue: #1a2128;
+  --font-bangna: bangna, sans-serif;
+}
+
+@font-face {
+  font-family: "bangna";
+  src: url("/fonts/bangna-new.ttf") format("ttf");
+}

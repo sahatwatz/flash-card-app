@@ -1,5 +1,36 @@
 @import "tailwindcss";
 
 body {
-  background-color: rgb(20, 0, 46);
+  background-color: #352f44;
+}
+
+@theme {
+  --color-midnight: #5c5470;
+  --color-tahiti: #faf0e6;
+  --color-bermuda: #b9b4c7;
+  --color-soulblue: #1a2128;
+  --font-bangna: bangna, sans-serif;
+  --font-caveat-regular: caveat-regular, sans-serif;
+  --font-knewave-regular: knewave-regular, sans-serif;
+  --font-nunito-light: nunito-light, sans-serif;
+}
+
+@font-face {
+  font-family: "bangna";
+  src: url("/fonts/bangna-new.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "caveat-regular";
+  src: url("/fonts/Caveat-Regular.ttf");
+}
+
+@font-face {
+  font-family: "knewave-regular";
+  src: url("/fonts/Knewave-Regular.ttf");
+}
+
+@font-face {
+  font-family: "nunito-light";
+  src: url("/fonts/Nunito-Light.ttf");
 }

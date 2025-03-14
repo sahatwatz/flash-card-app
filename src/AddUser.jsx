@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import supabase from "./supabase-client";
+import { HiDocumentAdd } from "react-icons/hi";
 
 export default function AddUser() {
   const [category, setCategory] = useState("");
@@ -7,6 +8,8 @@ export default function AddUser() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const categories = ["Frontend", "Backend", "Fullstack"];
 
   const addUser = async () => {
     if (!category.trim() || !question.trim() || !answer.trim()) {
@@ -28,25 +31,33 @@ export default function AddUser() {
   };
 
   return (
-    <div className="p-4 border rounded-lg shadow-md max-w-sm mx-auto bg-amber-100">
-      <h2 className="text-xl font-bold mb-2">เพิ่มผู้ใช้ใหม่</h2>
-      <input
-        type="text"
-        placeholder="ประเภท"
+    <div className="p-4 text-tahiti rounded-lg shadow-md gap-4 max-w-sm mx-auto flex flex-col justify-center items-center">
+      <HiDocumentAdd className="h-24 w-24 mt-[10%]" />
+      <h2 className="text-xl font-bold mb-2">Add Flash card</h2>
+      <select
         value={category}
         onChange={(e) => setCategory(e.target.value)}
-        className="w-full p-2 border rounded mb-2"
-      />
+        className="border p-2 mb-2 w-full bg-midnight"
+      >
+        <option value="" className="bg-amber-100">
+          -- Select Categories --
+        </option>
+        {categories.map((cat, index) => (
+          <option key={index} value={cat}>
+            {cat}
+          </option>
+        ))}
+      </select>
       <input
         type="question"
-        placeholder="คำถาม"
+        placeholder="Question"
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
         className="w-full p-2 border rounded mb-2"
       />
       <input
         type="answer"
-        placeholder="คำตอบ"
+        placeholder="Answer"
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
         className="w-full p-2 border rounded mb-2"
